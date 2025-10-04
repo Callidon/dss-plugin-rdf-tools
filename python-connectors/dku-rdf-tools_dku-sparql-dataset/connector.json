@@ -39,8 +39,9 @@
             "name": "custom_query",
             "label": "Custom CONSTRUCT SPARQL query",
             "type": "TEXTAREA",
-            "description": "Custom CONSTRUCT query used to extract data. It must be a valid CONSTRUCT query. Defaults to CONSTRUCT {?s ?p ?o} FROM {?s ?p ?o}",
-            "mandatory": false
+            "description": "Custom CONSTRUCT query used to extract data. It must be a valid CONSTRUCT query",
+            "mandatory": false,
+            "defaultValue": "CONSTRUCT {?s ?p ?o} FROM {?s ?p ?o}"
         },
 
         /* A "SELECT" parameter is a multi-choice selector. Choices are specified using the selectChoice field*/
