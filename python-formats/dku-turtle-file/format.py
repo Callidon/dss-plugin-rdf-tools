@@ -68,23 +68,14 @@ class MyOutputFormatter(OutputFormatter):
         """
         Write the header of the format (if any)
         """
-        if self.schema is not None:
-            self.stream.write(' ' + base64.b64encode(json.dumps(self.schema['columns'])) + '\n')
+        pass
 
     def write_row(self, row):
         """
         Write a row in the format
         :param row: array of strings, with one value per column in the schema
         """
-        clean_row = []
-        for x in row:
-            if isinstance(x, datetime.datetime):
-                clean_row.append(x.isoformat())
-            elif isinstance(x, pandas.Timestamp):
-                clean_row.append(x.isoformat())
-            else:
-                clean_row.append(x)
-        self.stream.write(base64.b64encode(json.dumps(clean_row)) + '\n')
+        pass
     
     def write_footer(self):
         """
