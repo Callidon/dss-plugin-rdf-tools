@@ -29,11 +29,18 @@
     */
     "params": [
         {
-            "name": "parameter1",
-            "label": "User-readable name",
+            "name": "url",
+            "label": "SPARQL endpoint URL",
             "type": "STRING",
             "description": "Some documentation for parameter1",
             "mandatory": true
+        },
+        {
+            "name": "custom_query",
+            "label": "Custom CONSTRUCT SPARQL query",
+            "type": "STRING",
+            "description": "Custom CONSSPARQL query used to extract data. It must be a valid CONSTRUCT query. Defaults to CONSTRUCT {?s ?p ?o} FROM {?s ?p ?o}",
+            "mandatory": false
         },
 
         /* A "SELECT" parameter is a multi-choice selector. Choices are specified using the selectChoice field*/
