@@ -105,6 +105,7 @@ class MyFormatExtractor(FormatExtractor):
         FormatExtractor.__init__(self, stream)
         self.graph = Graph()
         self.columns = ["subject", "predicate", "object"]
+        self.read = 0
         
         # parse file content
         file_content = "\n".join([line.decode('utf-8') for line in stream.readlines()])
@@ -123,18 +124,10 @@ class MyFormatExtractor(FormatExtractor):
         Read one row from the formatted stream
         :returns: a dict of the data (name, value), or None if reading is finished
         """
-        if self.stream.closed:
-            return None
-        line = self.stream.readline()
-        if len(line) == 0:
-            return None
-        # header line with the schema => skip
-        if line[0] == ' ':
-            return self.read_row()
-        values = json.loads(base64.b64decode(line[:-1]))
-        row = {}
-        for i in range(0,len(values)):
-            name = self.columns[i] if self.columns is not None and i < len(self.columns) else 'col_%i' % i
-            row[name] = values[i]
-        return row
+        if self.read < len(self.graph):
+            s, p, o = self.graph[self.read]
+            self.read = self.read + 1
+            return {"subject": s, "predicate": p, "object": o}
+
+        return None
         
