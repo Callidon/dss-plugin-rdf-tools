@@ -19,7 +19,7 @@
         "icon": "fas fa-project-diagram",
 
         // List of tags for filtering the list of plugins
-        "tags": [], //for example: ["Machine Learning", "NLP"]
+        "tags": ["semantic web", "Resource Description Framework", "rdf", "sparql", "turtle", "n3", "owl"], //for example: ["Machine Learning", "NLP"]
 
         // URL where the user can learn more about the plugin
         "url": "",
