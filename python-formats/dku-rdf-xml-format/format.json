@@ -1,4 +1,3 @@
-/* This file is the descriptor for the Custom python format dku-rdf-xml-format */
 {
     "meta" : {
         // label: name of the format as displayed, should be short
