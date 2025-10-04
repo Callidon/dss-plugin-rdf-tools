@@ -39,7 +39,7 @@
             "name": "custom_query",
             "label": "Custom CONSTRUCT SPARQL query",
             "type": "STRING",
-            "description": "Custom CONSSPARQL query used to extract data. It must be a valid CONSTRUCT query. Defaults to CONSTRUCT {?s ?p ?o} FROM {?s ?p ?o}",
+            "description": "Custom CONSTRUCT query used to extract data. It must be a valid CONSTRUCT query. Defaults to CONSTRUCT {?s ?p ?o} FROM {?s ?p ?o}",
             "mandatory": false
         },
 
