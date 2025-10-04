@@ -1,6 +1,6 @@
 from six.moves import xrange
 from dataiku.connector import Connector
-
+import json
 import requests
 
 
@@ -59,9 +59,9 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        r = requests.get(self.url, params={"query": self.construct_query})
-        for i in xrange(1,10):
-            yield { "subject" : str(i), "predicate" : str(i), "object": str(i) }
+        res = requests.get(self.url, params={"query": self.construct_query})
+        
+        yield { "subject" : json.dumps(res.json()), "predicate" : "", "object": "" }
 
 
     def get_writer(self, dataset_schema=None, dataset_partitioning=None,
