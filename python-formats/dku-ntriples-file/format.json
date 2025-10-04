@@ -2,7 +2,7 @@
 {
     "meta" : {
         // label: name of the format as displayed, should be short
-        "label": "n-triples",
+        "label": "N-triples",
 
         // description: longer string to help end users understand what this format is
         "description": "Read RDF data from n-triples files (.nt)",
