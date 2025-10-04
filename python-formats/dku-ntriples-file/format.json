@@ -29,9 +29,9 @@
     /* A mime type to use when exporting (if not set: the format is assumed to produce binary data) */
     "mime" : {
         /* the mime-type sent to the browser */
-        "mimeType": "text/turtle",
+        "mimeType": "application/n-triples",
         /* DSS creates file names by concatenating a unique identifier and this extension */
-        "extension": ".ttl"
+        "extension": ".nt"
     },
 
 
