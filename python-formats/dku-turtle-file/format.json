@@ -18,27 +18,20 @@
     "canRead": true,
 
     /* whether the format can be used to write files. If true, the get_output_formatter() must return a formatter */
-    "canWrite": true,
+    "canWrite": false,
 
     /* whether the format can provide the schema without reading the data. If true, the FormatExtractor must implement read_schema() */
     "canExtractSchema": true,
 
     /* to get additional options in the export dialogs, list them here */
-    "exportOptions": [
-        /* {
-            "id": "option1",
-            "label": "export using this plugin",
-            "predefinedConfig" : { "parameter1": "d" },
-            "compression": "NONE"
-        } */
-    ],
+    "exportOptions": [],
 
     /* A mime type to use when exporting (if not set: the format is assumed to produce binary data) */
     "mime" : {
         /* the mime-type sent to the browser */
-        "mimeType": "text/plain",
+        "mimeType": "text/turtle",
         /* DSS creates file names by concatenating a unique identifier and this extension */
-        "extension": ".csv"
+        "extension": ".ttl"
     },
 
 
@@ -51,37 +44,5 @@
 
     For the full list and for more details, see the documentation: https://doc.dataiku.com/dss/latest/plugins/reference/params.html
     */
-    "params": [
-        {
-            "name": "parameter1",
-            "label": "User-readable name",
-            "type": "STRING",
-            "description": "Some documentation for parameter1",
-            "mandatory": true
-        },
-        {
-            "name": "parameter2",
-            "type": "INT",
-            "defaultValue" : 42
-            /* Note that standard json parsing will return it as a double in Python (instead of an int), so you need to write
-               int(self.config()['parameter2'])
-            */
-        },
-
-        /* A "SELECT" parameter is a multi-choice selector. Choices are specified using the selectChoice field*/
-        {
-            "name": "parameter8",
-            "type": "SELECT",
-            "selectChoices": [
-                {
-                    "value": "val_x",
-                    "label": "display name for val_x"
-                },
-                {
-                    "value": "val_y",
-                    "label": "display name for val_y"
-                }
-            ]
-        }
-    ]
+    "params": []
 }
