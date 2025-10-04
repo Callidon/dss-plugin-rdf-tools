@@ -2,10 +2,10 @@
 {
     "meta" : {
         // label: name of the format as displayed, should be short
-        "label": "Turtle/N-triples",
+        "label": "Turtle",
 
         // description: longer string to help end users understand what this format is
-        "description": "Read RDF data from turtle and n-triples files (.ttl, .nt)",
+        "description": "Read RDF data from turtle files (.ttl)",
 
         // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
         "icon": "fas fa-file-code"
