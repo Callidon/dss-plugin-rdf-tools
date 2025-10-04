@@ -2,13 +2,13 @@
 {
     "meta" : {
         // label: name of the format as displayed, should be short
-        "label": "Custom format dku-turtle-file",
+        "label": "Turtle file",
 
         // description: longer string to help end users understand what this format is
-        "description": "",
+        "description": "Read RDF data from turtle files (.ttl)",
 
         // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
-        "icon": "fas fa-puzzle-piece"
+        "icon": "fas fa-project-diagram"
     },
 
     /* whether the format can be selectable as a dataset format */
