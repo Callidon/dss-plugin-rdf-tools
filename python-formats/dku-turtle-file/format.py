@@ -5,6 +5,8 @@ from dataiku.customformat import Formatter, OutputFormatter, FormatExtractor
 
 import json, base64, pandas, datetime
 
+from rdflib import Graph
+
 """
 A custom Python format is a subclass of Formatter, with the logic split into
 OutputFormatter for outputting to a format, and FormatExtractor for reading
@@ -101,20 +103,20 @@ class MyFormatExtractor(FormatExtractor):
         :param stream: the stream to read the formatted data from
         """
         FormatExtractor.__init__(self, stream)
-        self.columns = [c['name'] for c in schema['columns']] if schema is not None else ["subject", "predicate", "object"]
+        self.graph = Graph()
+        self.columns = ["subject", "predicate", "object"]
+        
+        # parse file content
+        file_content = "\n".join([line.decode('utf-8') for line in stream.readlines()])
+        self.graph.parse(file_content)
         
     def read_schema(self):
         """
         Get the schema of the data in the stream, if the schema can be known upfront.
         """
-        self.columns = ["subject", "predicate", "object"]
-        first = self.stream.readline()
-        if len(first) > 0 and first[0] == ' ':
-            columns = json.loads(base64.b64decode(first[1:-1]))
-            self.columns = [c['name'] for c in columns]
-            return columns
-        else:
-            return None
+        return [{"name": "subject", "type": "STRING"},
+                {"name": "predicate", "type": "STRING"},
+               {"name": "object", "type": "STRING"}]
     
     def read_row(self):
         """
