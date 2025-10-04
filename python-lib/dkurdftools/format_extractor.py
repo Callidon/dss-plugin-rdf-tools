@@ -27,9 +27,11 @@ class RDFFormatExtractor(FormatExtractor):
         """
         Get the schema of the data in the stream, if the schema can be known upfront.
         """
-        return [{"name": "subject", "type": "STRING"},
-                {"name": "predicate", "type": "STRING"},
-               {"name": "object", "type": "STRING"}]
+        return [
+            {"name": "subject", "type": "STRING"},
+            {"name": "predicate", "type": "STRING"},
+            {"name": "object", "type": "STRING"}
+        ]
     
     def read_row(self):
         """
