@@ -82,7 +82,7 @@
                     "label": "display name for val_y"
                 }
             ]
-        },
+        }
 
         // A 'COLUMN' parameter is a string, whose value is a column name from an input schema.
         // To specify the input schema whose column names are used, use the "columnRole" field like below.
