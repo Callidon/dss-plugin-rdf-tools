@@ -61,6 +61,7 @@ class MyConnector(Connector):
         The dataset schema and partitioning are given for information purpose.
         """
         # TODO add header to always request xml data
+        # TODO use records_limit to implement preview
         res = requests.get(self.url, params={"query": self.construct_query})
         graph = Graph()
         graph.parse(data=res.text, format="xml")
