@@ -99,7 +99,7 @@ class MyFormatExtractor(FormatExtractor):
         
         # parse file content
         file_content = "\n".join([line.decode('utf-8') for line in stream.readlines()])
-        self.graph.parse(file_content)
+        self.graph.parse(data=file_content, format="text/turtle")
         
         # create an iterator over the graph content
         self.iterator = iter(self.graph)
