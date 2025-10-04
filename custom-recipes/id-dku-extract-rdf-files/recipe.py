@@ -25,9 +25,9 @@ from dataiku.customrecipe import get_recipe_config
 input_managed_folders_names = get_input_names_for_role('input_managed_folders')
 input_managed_folders = [dataiku.Folder(name) for name in input_managed_folders_names]
 
-# For outputs, the process is the same:
+# There's only one unary output in this recipe
 output_dataset_names = get_output_names_for_role('output_dataset')
-output_datasets = [dataiku.Dataset(name) for name in output_dataset_names]
+output_dataset = dataiku.Dataset(output_dataset_names[0])
 
 
 # The configuration consists of the parameters set up by the user in the recipe Settings tab.
@@ -61,8 +61,8 @@ from rdflib import Graph
 
 
 # Read recipe inputs
-RDF_sources = dataiku.Folder("Hdp2qZyJ")
-RDF_sources_info = RDF_sources.get_info()
+#RDF_sources = dataiku.Folder("Hdp2qZyJ")
+#RDF_sources_info = RDF_sources.get_info()
 
 
 # Compute recipe outputs
@@ -72,16 +72,17 @@ RDF_sources_info = RDF_sources.get_info()
 # Compute a Pandas dataframe to write into the output dataset
 output_df = pd.DataFrame(columns=["subject", "predicate", "object"])
 
-g = Graph()
 
-for file_path in RDF_sources.list_paths_in_partition():
-    with RDF_sources.get_download_stream(file_path) as f:
-        g.parse(f.read())
+
+for input_managed_folder in input_managed_folders:
+    for file_path in input_managed_folder.list_paths_in_partition():
+        g = Graph()
+        with RDF_sources.get_download_stream(file_path) as f:
+            g.parse(f.read())
 
 for s, p, o in g:
     output_df.loc[len(output_df)]= [s, p, o]
 
 
 # Write recipe outputs
-semantic_data = dataiku.Dataset("semantic_data")
-semantic_data.write_with_schema(output_df)
+output_dataset.write_with_schema(output_df)
