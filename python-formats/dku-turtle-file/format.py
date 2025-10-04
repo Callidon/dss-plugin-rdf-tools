@@ -96,11 +96,13 @@ class MyFormatExtractor(FormatExtractor):
         FormatExtractor.__init__(self, stream)
         self.graph = Graph()
         self.columns = ["subject", "predicate", "object"]
-        self.read = 0
         
         # parse file content
         file_content = "\n".join([line.decode('utf-8') for line in stream.readlines()])
         self.graph.parse(file_content)
+        
+        # create an iterator over the graph content
+        self.iterator = iter(self.graph)
         
     def read_schema(self):
         """
@@ -115,10 +117,10 @@ class MyFormatExtractor(FormatExtractor):
         Read one row from the formatted stream
         :returns: a dict of the data (name, value), or None if reading is finished
         """
-        if self.read < len(self.graph):
-            s, p, o = self.graph[self.read]
-            self.read = self.read + 1
+        try:
+            s, p, o = next(self.iterator)
             return {"subject": s, "predicate": p, "object": o}
-
+        except StopIteration:
+            pass
         return None
         
