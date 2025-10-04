@@ -87,11 +87,11 @@
         // A 'COLUMN' parameter is a string, whose value is a column name from an input schema.
         // To specify the input schema whose column names are used, use the "columnRole" field like below.
         // The column names will come from the schema of the first dataset associated to that role.
-        {
+        /*{
             "name": "parameter4",
             "type": "COLUMN",
             "columnRole": "input_B_role"
-        }
+        }*/
 
         // The 'COLUMNS' type works in the same way, except that it is a list of strings.
     ],
