@@ -4,7 +4,7 @@ from rdflib import Graph
 
 class RDFFormatExtractor(FormatExtractor):
     """
-    Reads a stream in a format to a stream of rows
+    Extract an RDF file into a stream of rows
     """
     def __init__(self, rdf_format, stream, schema):
         """
