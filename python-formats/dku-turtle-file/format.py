@@ -1,21 +1,9 @@
-# This file is the actual code for the custom Python format tttest_tf
-
-# import the base class for the custom format
 from dataiku.customformat import Formatter, OutputFormatter, FormatExtractor
 
 from dkurdftools.format_extractor import RDFFormatExtractor 
 
 from rdflib import Graph
 
-"""
-A custom Python format is a subclass of Formatter, with the logic split into
-OutputFormatter for outputting to a format, and FormatExtractor for reading
-from a format
-
-The parameters it expects are specified in the format.json file.
-
-Note: the name of the class itself is not relevant.
-"""
 class MyFormatter(Formatter):
 
     def __init__(self, config, plugin_config):
