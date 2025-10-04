@@ -1,17 +1,7 @@
-# This file is the actual code for the custom Python dataset dku-rdf-tools_dku-sparql-dataset
-
-# import the base class for the custom dataset
 from six.moves import xrange
 from dataiku.connector import Connector
 
-"""
-A custom Python dataset is a subclass of Connector.
 
-The parameters it expects and some flags to control its handling by DSS are
-specified in the connector.json file.
-
-Note: the name of the class itself is not relevant.
-"""
 class MyConnector(Connector):
 
     def __init__(self, config, plugin_config):
