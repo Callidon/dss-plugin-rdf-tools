@@ -30,7 +30,7 @@ class MyFormatter(Formatter):
         :param stream: the stream to read the formatted data from
         :param schema: the schema of the rows that will be extracted. None when the extractor is used to detect the format.
         """
-        return RDFFormatExtractor("nt", stream, schema)
+        return RDFFormatExtractor("text/turtle", stream, schema)
 
 
 class MyOutputFormatter(OutputFormatter):
