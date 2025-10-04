@@ -2,6 +2,7 @@ from six.moves import xrange
 from dataiku.connector import Connector
 import json
 import requests
+from rdflib import Graph
 
 
 class MyConnector(Connector):
@@ -59,9 +60,12 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
+        # TODO add header to always request xml data
         res = requests.get(self.url, params={"query": self.construct_query})
-        rdf_xml_data = res.text
-        yield { "subject" : str(res.text), "predicate" : "", "object": "" }
+        graph = Graph()
+        graph.parse(data=res.text, format="xml")
+        for s, p, o in graph:
+            yield { "subject" : str(s), "predicate" : str(p), "object": str(o) }
 
 
     def get_writer(self, dataset_schema=None, dataset_partitioning=None,
