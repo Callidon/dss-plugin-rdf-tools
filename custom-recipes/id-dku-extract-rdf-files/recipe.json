@@ -19,7 +19,7 @@
 
     "inputRoles": [
         {
-            "name": "input_folders",
+            "name": "input_managed_folders",
             "label": "Input folder(s)",
             "description": "Folder(s) containing the input files",
             "arity": "NARY",
@@ -28,6 +28,8 @@
             "acceptsManagedFolder": false
         }
     ],
+    
+    "selectableFromFolder": "input_managed_folders",
 
     "outputRoles": [
         {
