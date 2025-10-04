@@ -8,10 +8,10 @@
     // Meta data for display purposes:
     "meta": {
         // label: name of the plugin as displayed, should be short
-        "label": "Dku rdf tools",
+        "label": "Resource Description Framework tools",
 
         // description: longer string to help end users understand what this plugin does
-        "description": "",
+        "description": "Extract, manipulate and reason on Resource Description Framework data",
 
         "author": "thomas.minier@dataiku.com",
 
