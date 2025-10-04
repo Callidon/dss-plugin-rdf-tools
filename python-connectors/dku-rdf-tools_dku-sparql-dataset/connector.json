@@ -41,7 +41,7 @@
             "type": "TEXTAREA",
             "description": "Custom CONSTRUCT query used to extract data. It must be a valid CONSTRUCT query.",
             "mandatory": false,
-            "defaultValue": "CONSTRUCT {?s ?p ?o} FROM {?s ?p ?o}"
+            "defaultValue": "CONSTRUCT { ?s ?p ?o } FROM { ?s ?p ?o }"
         },
 
         /* A "SELECT" parameter is a multi-choice selector. Choices are specified using the selectChoice field*/
