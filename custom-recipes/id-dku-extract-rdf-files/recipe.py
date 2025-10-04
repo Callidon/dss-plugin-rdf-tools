@@ -23,8 +23,7 @@ from dataiku.customrecipe import get_recipe_config
 
 # To  retrieve the datasets of an input role named 'input_A' as an array of dataset names:
 input_managed_folders_names = get_input_names_for_role('input_managed_folders')
-# The dataset objects themselves can then be created like this:
-# input_A_datasets = [dataiku.Dataset(name) for name in input_managed_folders]
+input_managed_folders = [dataiku.Folder(name) for name in input_managed_folders_names]
 
 # For outputs, the process is the same:
 output_dataset_names = get_output_names_for_role('output_dataset')
