@@ -42,23 +42,6 @@
             "description": "Custom CONSTRUCT query used to extract data. It must be a valid CONSTRUCT query.",
             "mandatory": false,
             "defaultValue": "CONSTRUCT { ?s ?p ?o } FROM { ?s ?p ?o }"
-        },
-
-        /* A "SELECT" parameter is a multi-choice selector. Choices are specified using the selectChoice field*/
-        {
-            "name": "parameter8",
-            "label": "--",
-            "type": "SELECT",
-            "selectChoices": [
-                {
-                    "value": "val_x",
-                    "label": "display name for val_x"
-                },
-                {
-                    "value": "val_y",
-                    "label": "display name for val_y"
-                }
-            ]
         }
     ]
 }
