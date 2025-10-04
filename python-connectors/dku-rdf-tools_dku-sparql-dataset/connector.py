@@ -49,7 +49,9 @@ class MyConnector(Connector):
 
         # In this example, we don't specify a schema here, so DSS will infer the schema
         # from the columns actually returned by the generate_rows method
-        return None
+        return [{"name": "subject", "type": "STRING"},
+                {"name": "predicate", "type": "STRING"},
+               {"name": "object", "type": "STRING"}]
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
