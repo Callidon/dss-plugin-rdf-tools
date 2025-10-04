@@ -3,7 +3,7 @@
 # import the base class for the custom format
 from dataiku.customformat import Formatter, OutputFormatter, FormatExtractor
 
-import json, base64, pandas, datetime
+from dkurdftools.format_extractor import RDFFormatExtractor 
 
 from rdflib import Graph
 
@@ -42,7 +42,7 @@ class MyFormatter(Formatter):
         :param stream: the stream to read the formatted data from
         :param schema: the schema of the rows that will be extracted. None when the extractor is used to detect the format.
         """
-        return MyFormatExtractor(stream, schema)
+        return RDFFormatExtractor("text/turtle", stream, schema)
 
 
 class MyOutputFormatter(OutputFormatter):
@@ -83,44 +83,4 @@ class MyOutputFormatter(OutputFormatter):
         """
         pass
         
-
-class MyFormatExtractor(FormatExtractor):
-    """
-    Reads a stream in a format to a stream of rows
-    """
-    def __init__(self, stream, schema):
-        """
-        Initialize the extractor
-        :param stream: the stream to read the formatted data from
-        """
-        FormatExtractor.__init__(self, stream)
-        self.graph = Graph()
-        self.columns = ["subject", "predicate", "object"]
-        
-        # parse file content
-        file_content = "\n".join([line.decode('utf-8') for line in stream.readlines()])
-        self.graph.parse(data=file_content, format="text/turtle")
-        
-        # create an iterator over the graph content
-        self.iterator = iter(self.graph)
-        
-    def read_schema(self):
-        """
-        Get the schema of the data in the stream, if the schema can be known upfront.
-        """
-        return [{"name": "subject", "type": "STRING"},
-                {"name": "predicate", "type": "STRING"},
-               {"name": "object", "type": "STRING"}]
-    
-    def read_row(self):
-        """
-        Read one row from the formatted stream
-        :returns: a dict of the data (name, value), or None if reading is finished
-        """
-        try:
-            s, p, o = next(self.iterator)
-            return {"subject": s, "predicate": p, "object": o}
-        except StopIteration:
-            pass
-        return None
         
