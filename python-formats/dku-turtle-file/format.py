@@ -101,12 +101,13 @@ class MyFormatExtractor(FormatExtractor):
         :param stream: the stream to read the formatted data from
         """
         FormatExtractor.__init__(self, stream)
-        self.columns = [c['name'] for c in schema['columns']] if schema is not None else None
+        self.columns = [c['name'] for c in schema['columns']] if schema is not None else ["subject", "predicate", "object"]
         
     def read_schema(self):
         """
         Get the schema of the data in the stream, if the schema can be known upfront.
         """
+        self.columns = ["subject", "predicate", "object"]
         first = self.stream.readline()
         if len(first) > 0 and first[0] == ' ':
             columns = json.loads(base64.b64decode(first[1:-1]))
