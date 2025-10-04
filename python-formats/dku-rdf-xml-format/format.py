@@ -3,7 +3,9 @@
 # import the base class for the custom format
 from dataiku.customformat import Formatter, OutputFormatter, FormatExtractor
 
-import json, base64, pandas, datetime
+from dkurdftools.format_extractor import RDFFormatExtractor 
+
+from rdflib import Graph
 
 """
 A custom Python format is a subclass of Formatter, with the logic split into
@@ -40,7 +42,7 @@ class MyFormatter(Formatter):
         :param stream: the stream to read the formatted data from
         :param schema: the schema of the rows that will be extracted. None when the extractor is used to detect the format.
         """
-        return MyFormatExtractor(stream, schema)
+        return RDFFormatExtractor("xml", stream, schema)
 
 
 class MyOutputFormatter(OutputFormatter):
@@ -66,23 +68,14 @@ class MyOutputFormatter(OutputFormatter):
         """
         Write the header of the format (if any)
         """
-        if self.schema is not None:
-            self.stream.write(' ' + base64.b64encode(json.dumps(self.schema['columns'])) + '\n')
+        pass
 
     def write_row(self, row):
         """
         Write a row in the format
         :param row: array of strings, with one value per column in the schema
         """
-        clean_row = []
-        for x in row:
-            if isinstance(x, datetime.datetime):
-                clean_row.append(x.isoformat())
-            elif isinstance(x, pandas.Timestamp):
-                clean_row.append(x.isoformat())
-            else:
-                clean_row.append(x)
-        self.stream.write(base64.b64encode(json.dumps(clean_row)) + '\n')
+        pass
     
     def write_footer(self):
         """
@@ -90,48 +83,4 @@ class MyOutputFormatter(OutputFormatter):
         """
         pass
         
-
-class MyFormatExtractor(FormatExtractor):
-    """
-    Reads a stream in a format to a stream of rows
-    """
-    def __init__(self, stream, schema):
-        """
-        Initialize the extractor
-        :param stream: the stream to read the formatted data from
-        """
-        FormatExtractor.__init__(self, stream)
-        self.columns = [c['name'] for c in schema['columns']] if schema is not None else None
-        
-    def read_schema(self):
-        """
-        Get the schema of the data in the stream, if the schema can be known upfront.
-        """
-        first = self.stream.readline()
-        if len(first) > 0 and first[0] == ' ':
-            columns = json.loads(base64.b64decode(first[1:-1]))
-            self.columns = [c['name'] for c in columns]
-            return columns
-        else:
-            return None
-    
-    def read_row(self):
-        """
-        Read one row from the formatted stream
-        :returns: a dict of the data (name, value), or None if reading is finished
-        """
-        if self.stream.closed:
-            return None
-        line = self.stream.readline()
-        if len(line) == 0:
-            return None
-        # header line with the schema => skip
-        if line[0] == ' ':
-            return self.read_row()
-        values = json.loads(base64.b64decode(line[:-1]))
-        row = {}
-        for i in range(0,len(values)):
-            name = self.columns[i] if self.columns is not None and i < len(self.columns) else 'col_%i' % i
-            row[name] = values[i]
-        return row
         
