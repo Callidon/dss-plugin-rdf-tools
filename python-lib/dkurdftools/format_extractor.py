@@ -9,7 +9,7 @@ class RDFFormatExtractor(FormatExtractor):
     def __init__(self, file_format, stream, schema):
         """
         Initialize the extractor
-        :param rdf_format: RDF file format ("text/turtle", "n3", etc)
+        :param rdf_format: RDF file format ("text/turtle", "n3", "xml", etc)
         :param stream: the stream to read the formatted data from
         """
         FormatExtractor.__init__(self, stream)
