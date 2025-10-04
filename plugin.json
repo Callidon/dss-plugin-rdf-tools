@@ -11,7 +11,7 @@
         "label": "RDF",
 
         // description: longer string to help end users understand what this plugin does
-        "description": "Extract, manipulate and reason on Resource Description Framework data",
+        "description": "Extract, manipulate and reason with the Resource Description Framework",
 
         "author": "Thomas Minier <thomas.minier@dataiku.com>",
 
