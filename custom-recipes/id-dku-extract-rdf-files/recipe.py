@@ -60,18 +60,12 @@ from dataiku import pandasutils as pdu
 from rdflib import Graph
 
 
-# Read recipe inputs
-#RDF_sources = dataiku.Folder("Hdp2qZyJ")
-#RDF_sources_info = RDF_sources.get_info()
-
-
 # Compute recipe outputs
 # TODO: Write here your actual code that computes the outputs
 # NB: DSS supports several kinds of APIs for reading and writing data. Please see doc.
 
 # Compute a Pandas dataframe to write into the output dataset
 output_df = pd.DataFrame(columns=["subject", "predicate", "object"])
-
 
 
 for input_managed_folder in input_managed_folders:
