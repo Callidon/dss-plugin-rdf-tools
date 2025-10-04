@@ -61,7 +61,7 @@ class MyConnector(Connector):
         """
         res = requests.get(self.url, params={"query": self.construct_query})
         
-        yield { "subject" : str(res.content()), "predicate" : "", "object": "" }
+        yield { "subject" : str(res.text), "predicate" : "", "object": "" }
 
 
     def get_writer(self, dataset_schema=None, dataset_partitioning=None,
