@@ -6,9 +6,10 @@ class RDFFormatExtractor(FormatExtractor):
     """
     Extract an RDF file into a stream of rows
     """
-    def __init__(self, rdf_format, stream, schema):
+    def __init__(self, file_format, stream, schema):
         """
         Initialize the extractor
+        :param rdf_format: RDF file format ("text/turtle", "n3", etc)
         :param stream: the stream to read the formatted data from
         """
         FormatExtractor.__init__(self, stream)
@@ -17,7 +18,7 @@ class RDFFormatExtractor(FormatExtractor):
         
         # parse file content
         file_content = "\n".join([line.decode('utf-8') for line in stream.readlines()])
-        self.graph.parse(data=file_content, format=rdf_format)
+        self.graph.parse(data=file_content, format=file_format)
         
         # create an iterator over the graph content
         self.iterator = iter(self.graph)
