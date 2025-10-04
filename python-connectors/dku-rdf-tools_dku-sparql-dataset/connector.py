@@ -60,7 +60,7 @@ class MyConnector(Connector):
         The dataset schema and partitioning are given for information purpose.
         """
         res = requests.get(self.url, params={"query": self.construct_query})
-        
+        rdf_xml_data = res.text
         yield { "subject" : str(res.text), "predicate" : "", "object": "" }
 
 
