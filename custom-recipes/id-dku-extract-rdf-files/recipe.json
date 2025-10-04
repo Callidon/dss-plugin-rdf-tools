@@ -24,7 +24,7 @@
             "description": "Folder(s) containing the input files",
             "arity": "NARY",
             "required": true,
-            "acceptsDataset": true,
+            "acceptsDataset": false,
             "acceptsManagedFolder": false
         }
     ],
