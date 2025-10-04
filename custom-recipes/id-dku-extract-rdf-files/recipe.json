@@ -39,7 +39,7 @@
             "arity": "UNARY",
             "required": true,
             "acceptsDataset": true
-        },
+        }
     ],
 
     /* The field "params" holds a list of all the params
