@@ -20,7 +20,9 @@ class MyConnector(Connector):
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
 
         self.url = self.config.get("url")
-        self.construct_query = self.config.get("custom_query", "CONSTRUCT {?s ?p ?o} FROM {?s ?p ?o}")
+        sparql_query = self.config.get("custom_query", "SELECT ?s ?p ?o FROM {?s ?p ?o}")
+        self.parsed_query = parse_query(self.sparql_query)
+        
 
     def get_read_schema(self):
         """
