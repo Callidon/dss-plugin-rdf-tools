@@ -1,7 +1,5 @@
 from typing import List
 
-from rdflib.term import BNode, Literal, URIRef, Variable
-from rdflib.namespace import XSD
 from rdflib.plugins.sparql.algebra import translateQuery
 from rdflib.plugins.sparql.parser import parseQuery
 from rdflib.plugins.sparql.algebra import translateAlgebra
