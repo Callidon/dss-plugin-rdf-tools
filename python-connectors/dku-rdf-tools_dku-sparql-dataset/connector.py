@@ -75,7 +75,7 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        sparql_query = deepcopy(self.sparql_query)
+        sparql_query = deepcopy(self.parsed_query)
         if records_limit > -1:
             sparql_query = add_limit_to_query(sparql_query, records_limit)
 
