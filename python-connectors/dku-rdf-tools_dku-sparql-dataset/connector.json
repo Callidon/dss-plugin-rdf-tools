@@ -67,7 +67,7 @@
         {
             "type": "CREDENTIAL_REQUEST",
             "name": "basic_credentials",
-            "label": "Basic credentials",
+            "label": "Basic auth",
             "mandatory": false,
             "credentialRequestSettings": {
                 "type": "BASIC"
