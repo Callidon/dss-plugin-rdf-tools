@@ -99,7 +99,7 @@ class MyConnector(Connector):
             sparql_results = res.json()
             for result in sparql_results.get("results", {}).get("bindings", []):
                 # format is {key: {"value", "type", "lang"}}
-                # TODO use rdflib function here to handle the response format
+                # TODO use an rdflib function here to handle the response format
                 yield {key: value["value"] for key, value in result.items()}
 
 
