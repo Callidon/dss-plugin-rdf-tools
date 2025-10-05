@@ -61,23 +61,17 @@
         },
         {
             "name": "sep2",
-            "label": "HTTP options",
+            "label": "Credentials options",
             "type": "SEPARATOR"
         },
         {
-            "name": "http_authorization_header",
-            "label": "HTTP Authorization header",
-            "type": "STRING",
-            "description": "The HTTP Authorization request header can be used to provide credentials that authenticate a user agent with a server, allowing access to protected resources.",
-            "mandatory": false
-        },
-        {
-  "type": "CREDENTIAL_REQUEST",
-  "name": "basic_credentials",
-  "label": "Basic credentials",
-  "credentialRequestSettings": {
-    "type": "BASIC"
-  }
-}
+            "type": "CREDENTIAL_REQUEST",
+            "name": "basic_credentials",
+            "label": "Basic credentials",
+            "mandatory": false,
+            "credentialRequestSettings": {
+                "type": "BASIC"
+            }
+        }
     ]
 }
