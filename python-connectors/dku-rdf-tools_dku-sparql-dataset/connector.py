@@ -1,8 +1,10 @@
 from six.moves import xrange
 from dataiku.connector import Connector
-import json
+
 import requests
 from rdflib import Graph
+
+from dkurdftools.sparql_parsing import parse_query, is_query_select_type, is_query_construct_type
 
 
 class MyConnector(Connector):
