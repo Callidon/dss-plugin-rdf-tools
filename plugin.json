@@ -22,7 +22,7 @@
         "tags": ["semantic web", "Resource Description Framework", "rdf", "sparql", "turtle", "n3", "owl"], //for example: ["Machine Learning", "NLP"]
 
         // URL where the user can learn more about the plugin
-        "url": "",
+        "url": "https://github.com/Callidon/dku-rdf-tools-plugin",
 
         "licenseInfo": "Apache Software License"
     }
