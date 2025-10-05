@@ -49,6 +49,7 @@ class MyConnector(Connector):
             return {
                 "columns": [
                     {"name": select_var, "type": "STRING"}
+                    # TODO make sure that there's no ? prefix on each variable name
                     for select_var in get_select_variables(self.parsed_query)
                 ]
             }
