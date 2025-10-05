@@ -30,7 +30,7 @@
     "params": [
         {
             "name": "sep1",
-            "label": "Configuration",
+            "label": "Main configuration",
             "type": "SEPARATOR"
         },
         {
