@@ -40,7 +40,7 @@
             "label": "SPARQL query",
             "type": "TEXTAREA",
             "description": "SPARQL query used to extract data. It must be a valid SELECT or CONSTRUCT query.",
-            "mandatory": false,
+            "mandatory": true,
             "defaultValue": "SELECT ?s ?p ?o FROM { ?s ?p ?o }"
         }
     ]
