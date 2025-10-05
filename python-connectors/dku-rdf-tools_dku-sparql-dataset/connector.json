@@ -36,12 +36,12 @@
             "mandatory": true
         },
         {
-            "name": "custom_query",
-            "label": "Custom CONSTRUCT SPARQL query",
+            "name": "sparql_query",
+            "label": "SPARQL query",
             "type": "TEXTAREA",
-            "description": "Custom CONSTRUCT query used to extract data. It must be a valid CONSTRUCT query.",
+            "description": "SPARQL query used to extract data. It must be a valid SELECT or CONSTRUCT query.",
             "mandatory": false,
-            "defaultValue": "CONSTRUCT { ?s ?p ?o } FROM { ?s ?p ?o }"
+            "defaultValue": "SELECT ?s ?p ?o FROM { ?s ?p ?o }"
         }
     ]
 }
