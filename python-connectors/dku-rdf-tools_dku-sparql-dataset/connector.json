@@ -42,6 +42,17 @@
             "description": "SPARQL query used to extract data. It must be a valid SELECT or CONSTRUCT query.",
             "mandatory": true,
             "defaultValue": "SELECT ?s ?p ?o FROM { ?s ?p ?o }"
-        }
+        },
+        {
+            "name": "select_results_type",
+            "label": "SELECT results format",
+            "description": "For SELECT queries, choose the format used to store results",
+            "type": "SELECT",
+            "selectChoices" : [
+              { "value": "json", "label": "SPARQL JSON"},
+              { "value": "rdf", "label": "RDF"}
+            ],
+            "mandatory": false
+      }
     ]
 }
