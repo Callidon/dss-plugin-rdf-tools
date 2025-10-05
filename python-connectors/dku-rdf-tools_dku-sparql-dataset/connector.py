@@ -78,13 +78,28 @@ class MyConnector(Connector):
         if records_limit > -1:
             sparql_query = add_limit_to_query(sparql_query, records_limit)
 
-        # TODO add header to always request xml data
-        res = requests.get(self.url, params={"query": unparse_query(self.parsed_query)})
+        # Add header to ensure the endpoint returns RDF xml data
+        # it's logically the default format, per the standard, but we cannot be sure as some implemntation
+        # uses a custom output format by default
+        
+        if is_query_construct_type(self.parsed_query):
+            content_type = "application/xml;charset=utf-8"
+        else:
+            content_type = "application/sparql-results+json;charset=utf-8"
+        headers = {'Content-type': content_type}
+        res = requests.get(self.url, params={"query": unparse_query(self.parsed_query)}, headers=headers)
         res.raise_for_status()
-        graph = Graph()
-        graph.parse(data=res.text, format="xml")
-        for s, p, o in graph:
-            yield { "subject" : str(s), "predicate" : str(p), "object": str(o) }
+        
+        
+        # analyse the output depending on the query type
+        if is_query_construct_type(self.parsed_query):
+            graph = Graph()
+            graph.parse(data=res.text, format="xml")
+            for s, p, o in graph:
+                yield { "subject" : str(s), "predicate" : str(p), "object": str(o) }
+        else:
+            results = res.json()
+            # TODO
 
 
     def get_writer(self, dataset_schema=None, dataset_partitioning=None,
