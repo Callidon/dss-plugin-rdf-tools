@@ -53,6 +53,6 @@
               { "value": "rdf", "label": "RDF"}
             ],
             "mandatory": false
-      }
+        }
     ]
 }
