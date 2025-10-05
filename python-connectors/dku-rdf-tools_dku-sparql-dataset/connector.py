@@ -80,7 +80,7 @@ class MyConnector(Connector):
 
         # TODO add header to always request xml data
         res = requests.get(self.url, params={"query": unparse_query(self.parsed_query)})
-        # TODO check that status_code is 200
+        res.raise_for_status()
         graph = Graph()
         graph.parse(data=res.text, format="xml")
         for s, p, o in graph:
