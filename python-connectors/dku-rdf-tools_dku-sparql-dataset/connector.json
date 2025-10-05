@@ -55,6 +55,11 @@
             "defaultValue": "json"
         },
         {
+            "name": "sep1",
+            "label": "Reads",
+            "type": "SEPARATOR"
+        },
+        {
             "name": "http_authorization_header",
             "label": "HTTP Authorization header",
             "type": "STRING",
