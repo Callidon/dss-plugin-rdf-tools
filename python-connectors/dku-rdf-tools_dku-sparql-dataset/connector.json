@@ -56,7 +56,7 @@
         },
         {
             "name": "sep1",
-            "label": "Reads",
+            "label": "HTTP options",
             "type": "SEPARATOR"
         },
         {
