@@ -54,7 +54,7 @@
             "type": "SELECT",
             "selectChoices" : [
               { "value": "json", "label": "JSON"},
-              { "value": "rdf", "label": "RDF"}
+              { "value": "n3", "label": "N3"}
             ],
             "mandatory": false,
             "defaultValue": "json"
