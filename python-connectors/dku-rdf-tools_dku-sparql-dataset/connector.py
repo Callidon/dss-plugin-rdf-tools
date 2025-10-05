@@ -87,7 +87,7 @@ class MyConnector(Connector):
         else:
             content_type = "application/sparql-results+json;charset=utf-8"
         headers = {"Content-type": content_type, "User-agent": "dataiku/rdf-tools-plugin"}
-        res = requests.get(self.url, params={"query": unparse_query(self.parsed_query)}, headers=headers)
+        res = requests.get(self.url, params={"query": unparse_query(sparql_query)}, headers=headers)
         res.raise_for_status()
         
         # analyse the output depending on the query type
