@@ -49,7 +49,7 @@
             "description": "For SELECT queries, choose the format used to store results",
             "type": "SELECT",
             "selectChoices" : [
-              { "value": "json", "label": "SPARQL JSON"},
+              { "value": "json", "label": "JSON"},
               { "value": "rdf", "label": "RDF"}
             ],
             "mandatory": false
