@@ -6,10 +6,12 @@ from rdflib.plugins.sparql.algebra import translateAlgebra
 from rdflib.plugins.sparql.sparql import Query
 
 def parse_query(query: str) -> Query:
+    """Parse a string SPARQL query into a logical query plan"""
     return translateQuery(parseQuery(query))
 
 
 def unparse_query(parsed_query: Query) -> str:
+    """Turn a logical SPARQL query plan into a string SPARQL query"""
     return translateAlgebra(parsed_query)
 
 
