@@ -1,3 +1,5 @@
+from typing import List
+
 from rdflib.term import BNode, Literal, URIRef, Variable
 from rdflib.namespace import XSD
 from rdflib.plugins.sparql.algebra import translateQuery
@@ -44,6 +46,6 @@ def add_limit_to_query(parsed_query: Query, limit: int) -> Query:
     # TODO update AST with a LIMIT clause
     return parsed_query
 
-def get_select_variables(parsed_query: Query):
+def get_select_variables(parsed_query: Query) -> List[str]:
     # TODO
     return []
