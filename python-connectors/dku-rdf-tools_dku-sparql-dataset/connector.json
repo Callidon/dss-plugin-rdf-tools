@@ -32,7 +32,6 @@
             "name": "url",
             "label": "SPARQL endpoint URL",
             "type": "STRING",
-            "description": "Some documentation for parameter1",
             "mandatory": true
         },
         {
