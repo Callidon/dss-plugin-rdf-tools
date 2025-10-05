@@ -70,6 +70,14 @@
             "type": "STRING",
             "description": "The HTTP Authorization request header can be used to provide credentials that authenticate a user agent with a server, allowing access to protected resources.",
             "mandatory": false
-        }
+        },
+        {
+  "type": "CREDENTIAL_REQUEST",
+  "name": "basic_credentials",
+  "label": "Basic credentials",
+  "credentialRequestSettings": {
+    "type": "BASIC"
+  }
+}
     ]
 }
