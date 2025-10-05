@@ -85,7 +85,7 @@ class MyConnector(Connector):
             content_type = "application/xml;charset=utf-8"
         else:
             content_type = "application/sparql-results+json;charset=utf-8"
-        headers = {'Content-type': content_type}
+        headers = {"Content-type": content_type, "User-agent": "dataiku/rdf-tools-plugin"}
         res = requests.get(self.url, params={"query": unparse_query(self.parsed_query)}, headers=headers)
         res.raise_for_status()
         
