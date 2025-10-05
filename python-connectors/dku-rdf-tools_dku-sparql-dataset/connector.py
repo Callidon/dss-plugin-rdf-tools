@@ -1,10 +1,12 @@
+from copy import deepcopy
+
 from six.moves import xrange
 from dataiku.connector import Connector
 
 import requests
 from rdflib import Graph
 
-from dkurdftools.sparql_parsing import parse_query, is_query_select_type, is_query_construct_type
+from dkurdftools.sparql_parsing import parse_query, is_query_select_type, is_query_construct_type, add_limit_to_query
 
 
 class MyConnector(Connector):
@@ -64,9 +66,13 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
+        sparql_query = deepcopy(self.sparql_query)
+        if records_limit > -1:
+            sparql_query = add_limit_to_query(sparql_query, records_limit)
+
         # TODO add header to always request xml data
-        # TODO use records_limit to implement preview
-        res = requests.get(self.url, params={"query": self.construct_query})
+        res = requests.get(self.url, params={"query": unparse_query(self.parsed_query)})
+        # TODO check that status_code is 200
         graph = Graph()
         graph.parse(data=res.text, format="xml")
         for s, p, o in graph:
