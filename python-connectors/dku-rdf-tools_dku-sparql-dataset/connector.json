@@ -70,7 +70,7 @@
             "label": "Basic auth",
             "mandatory": false,
             "credentialRequestSettings": {
-                "type": "BASIC"
+                "type": "SINGLE_FIELD"
             }
         }
     ]
