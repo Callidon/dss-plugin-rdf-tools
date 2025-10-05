@@ -29,6 +29,11 @@
     */
     "params": [
         {
+            "name": "sep1",
+            "label": "Configuration",
+            "type": "SEPARATOR"
+        },
+        {
             "name": "url",
             "label": "SPARQL endpoint URL",
             "type": "STRING",
@@ -55,7 +60,7 @@
             "defaultValue": "json"
         },
         {
-            "name": "sep1",
+            "name": "sep2",
             "label": "HTTP options",
             "type": "SEPARATOR"
         },
