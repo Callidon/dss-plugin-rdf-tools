@@ -11,10 +11,10 @@ def unparse_query(parsed_query: str) -> dict:
     return {} # TODO
 
 
-def is_query_select_type(parsed_query: str):
+def is_query_select_type(parsed_query: str) -> bool:
     return parsed_query.name == "Select"
 
-def is_query_construct_type(parsed_query: str):
+def is_query_construct_type(parsed_query: str) -> bool:
     return parsed_query.name == "Construct"
 
 
