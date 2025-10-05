@@ -5,7 +5,7 @@ from dataiku.connector import Connector
 import requests
 from rdflib import Graph
 
-from dkurdftools.sparql_parsing import parse_query, is_query_select_type, is_query_construct_type, add_limit_to_query
+from dkurdftools.sparql_parsing import parse_query, is_query_select_type, is_query_construct_type, add_limit_to_query, get_select_variables
 
 
 class MyConnector(Connector):
@@ -45,15 +45,24 @@ class MyConnector(Connector):
         Supported types are: string, int, bigint, float, double, date, boolean
         """
 
-        # In this example, we don't specify a schema here, so DSS will infer the schema
-        # from the columns actually returned by the generate_rows method
-        return {
-            "columns": [
-                {"name": "subject", "type": "STRING"},
-                {"name": "predicate", "type": "STRING"},
-                {"name": "object", "type": "STRING"}
-            ]
-        }
+        if is_query_select_type(self.parsed_query):
+            return {
+                "columns": [
+                    {"name": select_var, "type": "STRING"}
+                    for select_var in get_select_variables(self.parsed_query)
+                ]
+            }
+        
+        if is_query_construct_type(self.parsed_query):
+            return {
+                "columns": [
+                    {"name": "subject", "type": "STRING"},
+                    {"name": "predicate", "type": "STRING"},
+                    {"name": "object", "type": "STRING"}
+                ]
+            }
+        # TODO use a better exception class?
+        raise NotImplemented("Unsupported query type, only SELECT and CONSTRUCT query are supported")
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
