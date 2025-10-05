@@ -101,7 +101,7 @@ class MyConnector(Connector):
             for result in sparql_results.get("results", {}).get("bindings", []):
                 # format is {key: {"value", "type", "lang"}}
                 # TODO use an rdflib function here to handle the response format
-                # TODO add a parameter so users can choose if they get the sparql json as value or a real RDF value?
+                # TODO add a parameter so users can choose if they get the raw sparql json or the RDF value
                 yield {key: value["value"] for key, value in result.items()}
 
 
