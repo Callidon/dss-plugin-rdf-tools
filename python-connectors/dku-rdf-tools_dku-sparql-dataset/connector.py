@@ -1,6 +1,5 @@
 from copy import deepcopy
 
-from six.moves import xrange
 from dataiku.connector import Connector
 
 import requests
