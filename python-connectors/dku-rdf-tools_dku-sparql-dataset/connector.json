@@ -52,7 +52,8 @@
               { "value": "json", "label": "JSON"},
               { "value": "rdf", "label": "RDF"}
             ],
-            "mandatory": false
+            "mandatory": false,
+            "defaultValue": "json"
         }
     ]
 }
