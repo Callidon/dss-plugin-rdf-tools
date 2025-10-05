@@ -53,6 +53,13 @@
             ],
             "mandatory": false,
             "defaultValue": "json"
+        },
+        {
+            "name": "http_authorization_header",
+            "label": "HTTP Authorization header",
+            "type": "STRING",
+            "description": "The HTTP Authorization request header can be used to provide credentials that authenticate a user agent with a server, allowing access to protected resources.",
+            "mandatory": false
         }
     ]
 }
