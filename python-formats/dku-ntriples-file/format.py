@@ -1,11 +1,9 @@
-from dataiku.customformat import Formatter, OutputFormatter, FormatExtractor
+from dataiku.customformat import Formatter, OutputFormatter
 
-from dkurdftools.format_extractor import RDFFormatExtractor 
+from dkurdftools.formats.format_extractor import RDFFormatExtractor
 
-from rdflib import Graph
 
 class MyFormatter(Formatter):
-
     def __init__(self, config, plugin_config):
         """
         The configuration parameters set up by the user for the formatter instance
@@ -14,7 +12,9 @@ class MyFormatter(Formatter):
         file settings.json at the root of the plugin directory are passed as a json
         object 'plugin_config' to the constructor
         """
-        Formatter.__init__(self, config, plugin_config)  # pass the parameters to the base class
+        Formatter.__init__(
+            self, config, plugin_config
+        )  # pass the parameters to the base class
 
     def get_output_formatter(self, stream, schema):
         """
@@ -23,7 +23,7 @@ class MyFormatter(Formatter):
         :param schema: the schema of the rows that will be formatted (never None)
         """
         return MyOutputFormatter(stream, schema)
-        
+
     def get_format_extractor(self, stream, schema=None):
         """
         Return a FormatExtractor for this format
@@ -36,14 +36,15 @@ class MyFormatter(Formatter):
 class MyOutputFormatter(OutputFormatter):
     """
     Writes a stream of rows to a stream in a format. The calls will be:
-    
+
     * write_header()
-    * write_row(row_1)  
+    * write_row(row_1)
       ...
-    * write_row(row_N)  
-    * write_footer()  
-    
+    * write_row(row_N)
+    * write_footer()
+
     """
+
     def __init__(self, stream, schema):
         """
         Initialize the formatter
@@ -51,7 +52,7 @@ class MyOutputFormatter(OutputFormatter):
         """
         OutputFormatter.__init__(self, stream)
         self.schema = schema
-        
+
     def write_header(self):
         """
         Write the header of the format (if any)
@@ -64,11 +65,9 @@ class MyOutputFormatter(OutputFormatter):
         :param row: array of strings, with one value per column in the schema
         """
         pass
-    
+
     def write_footer(self):
         """
         Write the footer of the format (if any)
         """
         pass
-        
-        

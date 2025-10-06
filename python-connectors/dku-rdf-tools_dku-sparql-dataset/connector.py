@@ -5,11 +5,17 @@ from dataiku.connector import Connector
 import requests
 from rdflib import Graph
 
-from dkurdftools.sparql_parsing import parse_query, is_query_select_type, is_query_construct_type, add_limit_to_query, get_select_variables
+from dkurdftools.sparql_parsing import (
+    parse_query,
+    unparse_query,
+    is_query_select_type,
+    is_query_construct_type,
+    add_limit_to_query,
+    get_select_variables,
+)
 
 
 class MyConnector(Connector):
-
     def __init__(self, config, plugin_config):
         """
         The configuration parameters set up by the user in the settings tab of the
@@ -18,12 +24,15 @@ class MyConnector(Connector):
         file settings.json at the root of the plugin directory are passed as a json
         object 'plugin_config' to the constructor
         """
-        Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
+        Connector.__init__(
+            self, config, plugin_config
+        )  # pass the parameters to the base class
 
         self.url = self.config.get("url")
-        sparql_query = self.config.get("custom_query", "SELECT ?s ?p ?o FROM {?s ?p ?o}")
-        self.parsed_query = parse_query(self.sparql_query)
-        
+        sparql_query = self.config.get(
+            "custom_query", "SELECT ?s ?p ?o FROM {?s ?p ?o}"
+        )
+        self.parsed_query = parse_query(sparql_query)
 
     def get_read_schema(self):
         """
@@ -53,20 +62,27 @@ class MyConnector(Connector):
                     for select_var in get_select_variables(self.parsed_query)
                 ]
             }
-        
+
         if is_query_construct_type(self.parsed_query):
             return {
                 "columns": [
                     {"name": "subject", "type": "STRING"},
                     {"name": "predicate", "type": "STRING"},
-                    {"name": "object", "type": "STRING"}
+                    {"name": "object", "type": "STRING"},
                 ]
             }
         # TODO use a better exception class?
-        raise NotImplemented("Unsupported query type, only SELECT and CONSTRUCT query are supported")
+        raise NotImplementedError(
+            "Unsupported query type, only SELECT and CONSTRUCT query are supported"
+        )
 
-    def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
-                            partition_id=None, records_limit = -1):
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
         """
         The main reading method.
 
@@ -86,16 +102,21 @@ class MyConnector(Connector):
             content_type = "application/xml;charset=utf-8"
         else:
             content_type = "application/sparql-results+json;charset=utf-8"
-        headers = {"Content-type": content_type, "User-agent": "dataiku/rdf-tools-plugin"}
-        res = requests.get(self.url, params={"query": unparse_query(sparql_query)}, headers=headers)
+        headers = {
+            "Content-type": content_type,
+            "User-agent": "dataiku/rdf-tools-plugin",
+        }
+        res = requests.get(
+            self.url, params={"query": unparse_query(sparql_query)}, headers=headers
+        )
         res.raise_for_status()
-        
+
         # analyse the output depending on the query type
         if is_query_construct_type(self.parsed_query):
             graph = Graph()
             graph.parse(data=res.text, format="xml")
             for s, p, o in graph:
-                yield { "subject" : str(s), "predicate" : str(p), "object": str(o) }
+                yield {"subject": str(s), "predicate": str(p), "object": str(o)}
         else:
             sparql_results = res.json()
             for result in sparql_results.get("results", {}).get("bindings", []):
@@ -104,9 +125,13 @@ class MyConnector(Connector):
                 # TODO add a parameter so users can choose if they get the raw sparql json or the RDF value
                 yield {key: value["value"] for key, value in result.items()}
 
-
-    def get_writer(self, dataset_schema=None, dataset_partitioning=None,
-                         partition_id=None, write_mode="OVERWRITE"):
+    def get_writer(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        write_mode="OVERWRITE",
+    ):
         """
         Returns a writer object to write in the dataset (or in a partition).
 
@@ -120,19 +145,16 @@ class MyConnector(Connector):
         """
         raise NotImplementedError
 
-
     def get_partitioning(self):
         """
         Return the partitioning schema that the connector defines.
         """
         raise NotImplementedError
 
-
     def list_partitions(self, partitioning):
         """Return the list of partitions for the partitioning scheme
         passed as parameter"""
         return []
-
 
     def partition_exists(self, partitioning, partition_id):
         """Return whether the partition passed as parameter exists
@@ -141,7 +163,6 @@ class MyConnector(Connector):
         in the connector definition
         """
         raise NotImplementedError
-
 
     def get_records_count(self, partitioning=None, partition_id=None):
         """
