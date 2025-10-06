@@ -1,6 +1,6 @@
 from dataiku.customformat import FormatExtractor
-from rdflib import Graph
-        
+
+from .utils import parse_rdf_stream_as_graph
 
 class RDFFormatExtractor(FormatExtractor):
     """
@@ -13,13 +13,9 @@ class RDFFormatExtractor(FormatExtractor):
         :param stream: the stream to read the formatted data from
         """
         FormatExtractor.__init__(self, stream)
-        self.graph = Graph()
         self.columns = ["subject", "predicate", "object"]
-        
-        # parse file content
-        file_content = "\n".join([line.decode('utf-8') for line in stream.readlines()])
-        self.graph.parse(data=file_content, format=file_format)
-        
+        # load file content
+        self.graph = parse_rdf_stream_as_graph(stream)        
         # create an iterator over the graph content
         self.iterator = iter(self.graph)
         
