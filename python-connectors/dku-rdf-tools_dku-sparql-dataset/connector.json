@@ -25,6 +25,11 @@
             "mandatory": true
         },
         {
+            "name": "sparql_query",
+            "type": "TEXT",
+            "mandatory": true
+        },
+        {
             "name": "select_results_type",
             "label": "SELECT results format",
             "description": "For SELECT queries, choose the format used to store results",
