@@ -83,11 +83,11 @@ def generate_rows(
     # it's logically the default format, per the standard, but we cannot be sure as some implemntation
     # uses a custom output format by default
     if query_type == "construct":
-        content_type = "application/xml;charset=utf-8"
+        accept = "application/xml;charset=utf-8"
     else:
-        content_type = "application/sparql-results+json;charset=utf-8"
+        accept = "application/sparql-results+json"
     headers = {
-        "Content-type": content_type,
+        "Accept": accept,
         "User-agent": "dataiku/rdf-tools-plugin",
     }
     res = requests.get(
