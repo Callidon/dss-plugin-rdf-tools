@@ -16,8 +16,7 @@ class MyConnector(Connector):
         Connector.__init__(self, config, plugin_config)
 
         self.url = self.config.get("url")
-        sparql_query = self.config.get("sparql_query")
-        self.parsed_query = parse_query(sparql_query)
+        self.sparql_query = self.config.get("sparql_query")
         self.select_results_type = self.config.get("select_results_type", "json")
 
     def get_read_schema(self):
@@ -39,7 +38,7 @@ class MyConnector(Connector):
 
         Supported types are: string, int, bigint, float, double, date, boolean
         """
-        return get_read_schema(self.parsed_query)
+        return get_read_schema(parse_query(self.sparql_query))
 
     def generate_rows(
         self,
@@ -58,7 +57,7 @@ class MyConnector(Connector):
         """
         return generate_rows(
             self.url,
-            self.parsed_query,
+            parse_query(self.sparql_query),
             records_limit=records_limit,
             select_results_type=self.select_results_type,
         )

@@ -1,4 +1,3 @@
-from copy import deepcopy
 from typing import Iterator, Literal
 from rdflib import Graph
 from rdflib.plugins.sparql.sparql import Query
@@ -77,9 +76,8 @@ def generate_rows(
     :yield: Dataset record
     """
     query_type = get_and_check_sparql_query_type(parsed_query)
-    sparql_query = deepcopy(parsed_query)
     if records_limit > -1:
-        sparql_query = add_limit_to_query(sparql_query, records_limit)
+        parsed_query = add_limit_to_query(parsed_query, records_limit)
 
     # Add header to ensure the endpoint returns the same data format per query
     # it's logically the default format, per the standard, but we cannot be sure as some implemntation
@@ -93,7 +91,7 @@ def generate_rows(
         "User-agent": "dataiku/rdf-tools-plugin",
     }
     res = requests.get(
-        url, params={"query": unparse_query(sparql_query)}, headers=headers
+        url, params={"query": unparse_query(parsed_query)}, headers=headers
     )
     res.raise_for_status()
 
