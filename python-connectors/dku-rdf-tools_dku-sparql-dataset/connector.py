@@ -22,6 +22,7 @@ class MyConnector(Connector):
             "custom_query", "SELECT ?s ?p ?o FROM {?s ?p ?o}"
         )
         self.parsed_query = parse_query(sparql_query)
+        self.select_results_type = self.config.get("select_results_type", "json")
 
     def get_read_schema(self):
         """
@@ -59,7 +60,12 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        return generate_rows(self.url, self.parsed_query, records_limit)
+        return generate_rows(
+            self.url,
+            self.parsed_query,
+            records_limit=records_limit,
+            select_results_type=self.select_results_type,
+        )
 
     def get_writer(
         self,
