@@ -26,8 +26,11 @@
         },
         {
             "name": "sparql_query",
-            "type": "TEXT",
-            "mandatory": true
+            "label": "SPARQL query",
+            "type": "TEXTAREA",
+            "description": "SPARQL query used to extract data. It must be a valid SELECT or CONSTRUCT query.",
+            "mandatory": true,
+            "defaultValue": "SELECT ?s ?p ?o FROM { ?s ?p ?o }"
         },
         {
             "name": "select_results_type",
