@@ -30,7 +30,7 @@ def is_query_select_type(parsed_query: Query) -> bool:
     :param parsed_query: SPARQL logical query plan
     :return True if the query is a Select query, False otherwise
     """
-    return parsed_query.algebra.name == "Select"
+    return parsed_query.algebra.name.lower() == "selectquery"
 
 
 def is_query_construct_type(parsed_query: Query) -> bool:
@@ -39,7 +39,7 @@ def is_query_construct_type(parsed_query: Query) -> bool:
     :param parsed_query: SPARQL logical query plan
     :return True if the query is a Construct query, False otherwise
     """
-    return parsed_query.algebra.name == "Construct"
+    return parsed_query.algebra.name.lower() == "constructquery"
 
 
 def add_limit_to_query(parsed_query: Query, limit: int) -> Query:
@@ -48,5 +48,4 @@ def add_limit_to_query(parsed_query: Query, limit: int) -> Query:
 
 
 def get_select_variables(parsed_query: Query) -> List[str]:
-    # TODO
-    return []
+    return [str(var) for var in parsed_query.algebra.PV]

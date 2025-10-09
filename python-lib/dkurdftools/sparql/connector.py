@@ -48,7 +48,6 @@ def get_read_schema(parsed_query: Query) -> dict:
         return {
             "columns": [
                 {"name": select_var, "type": "STRING"}
-                # TODO make sure that there's no ? prefix on each variable name
                 for select_var in get_select_variables(parsed_query)
             ]
         }

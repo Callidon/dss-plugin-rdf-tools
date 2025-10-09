@@ -13,14 +13,10 @@ class MyConnector(Connector):
         file settings.json at the root of the plugin directory are passed as a json
         object 'plugin_config' to the constructor
         """
-        Connector.__init__(
-            self, config, plugin_config
-        )  # pass the parameters to the base class
+        Connector.__init__(self, config, plugin_config)
 
         self.url = self.config.get("url")
-        sparql_query = self.config.get(
-            "custom_query", "SELECT ?s ?p ?o FROM {?s ?p ?o}"
-        )
+        sparql_query = self.config.get("sparql_query")
         self.parsed_query = parse_query(sparql_query)
         self.select_results_type = self.config.get("select_results_type", "json")
 
