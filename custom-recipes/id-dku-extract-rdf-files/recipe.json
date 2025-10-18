@@ -1,107 +1,105 @@
-// This file is the descriptor for the Custom code recipe id-dku-rdf-files-extractor
 {
-    // Meta data for display purposes
-    "meta": {
-        "label": "Extract RDF files",
-        "description": "Extract RDF files into a dataset",
-        "icon": "fas fa-project-diagram"
+  "meta": {
+    "label": "Extract RDF files",
+    "description": "Extract RDF files into a dataset",
+    "icon": "fas fa-file-import"
+  },
+
+  "kind": "PYTHON",
+
+  "inputRoles": [
+    {
+      "name": "input_managed_folders",
+      "label": "Input folder(s)",
+      "description": "Folder(s) containing the input files",
+      "arity": "NARY",
+      "required": true,
+      "acceptsDataset": false,
+      "acceptsManagedFolder": true
+    }
+  ],
+
+  "selectableFromFolder": "input_managed_folders",
+
+  "outputRoles": [
+    {
+      "name": "output_dataset",
+      "label": "Output dataset",
+      "description": "Dataset where the RDF data will be extracted",
+      "arity": "UNARY",
+      "required": true,
+      "acceptsDataset": true
+    }
+  ],
+
+  "params": [
+    {
+      "name": "output_schema",
+      "label": "Output schema",
+      "type": "SELECT",
+      "selectChoices": [
+        {
+          "value": "sql_table",
+          "label": "Three columns (subject, predicate, object) and one row per triple"
+        },
+        {
+          "value": "single_column",
+          "label": "Store all RDF triples in a single column"
+        }
+      ],
+      "defaultValue": "sql_table",
+      "mandatory": true
     },
-
-    "kind": "PYTHON",
-    
-
-    // Inputs and outputs are defined by roles. In the recipe's I/O tab, the user can associate one
-    // or more dataset to each input and output role.
-
-    // The "arity" field indicates whether the user can associate several datasets to the role ('NARY')
-    // or at most one ('UNARY'). The "required" field indicates whether the user is allowed to
-    // associate no dataset with the role.
-
-    "inputRoles": [
+    {
+      "name": "single_column_output",
+      "label": "Output column name",
+      "type": "COLUMN",
+      "columnRole": "output_dataset",
+      "visibilityCondition": "model.output_schema == 'single_column'",
+      "mandatory": true
+    },
+    {
+      "name": "single_column_output_format",
+      "label": "Output format",
+      "type": "SELECT",
+      "selectChoices": [
         {
-            "name": "input_managed_folders",
-            "label": "Input folder(s)",
-            "description": "Folder(s) containing the input files",
-            "arity": "NARY",
-            "required": true,
-            "acceptsDataset": false,
-            "acceptsManagedFolder": false
-        }
-    ],
-    
-    "selectableFromFolder": "input_managed_folders",
-
-    "outputRoles": [
-        {
-            "name": "output_dataset",
-            "label": "Output dataset",
-            "description": "Dataset where the RDF data will be extracted",
-            "arity": "UNARY",
-            "required": true,
-            "acceptsDataset": true
-        }
-    ],
-
-    /* The field "params" holds a list of all the params
-       for wich the user will be prompted for values in the Settings tab of the recipe.
-
-       The available parameter types include:
-       STRING, STRINGS, INT, DOUBLE, BOOLEAN, SELECT, MULTISELECT, MAP, TEXTAREA, PRESET, COLUMN, COLUMNS
-
-       For the full list and for more details, see the documentation: https://doc.dataiku.com/dss/latest/plugins/reference/params.html
-    */
-
-    "params": [
-        {
-            "name": "parameter1",
-            "label": "User-readable label",
-            "type": "STRING",
-            "description": "Some documentation for parameter1",
-            "mandatory": true
+          "value": "turtle",
+          "label": "Turtle"
         },
         {
-            "name": "parameter2",
-            "type": "INT",
-            "defaultValue": 42
-            /* Note that standard json parsing will return it as a double in Python (instead of an int), so you need to write
-               int(get_recipe_config()['parameter2'])
-            */
+          "value": "json-ld",
+          "label": "JSON-LD"
         },
-
-        // A "SELECT" parameter is a multi-choice selector. Choices are specified using the selectChoice field
         {
-            "name": "parameter3",
-            "type": "SELECT",
-            "selectChoices": [
-                {
-                    "value": "val_x",
-                    "label": "display name for val_x"
-                },
-                {
-                    "value": "val_y",
-                    "label": "display name for val_y"
-                }
-            ]
+          "value": "xml",
+          "label": "RDF XML"
+        },
+        {
+          "value": "prettyxml",
+          "label": "Pretty RDF XML"
+        },
+        {
+          "value": "ntriples",
+          "label": "N-Triples"
+        },
+        {
+          "value": "n3",
+          "label": "Notation-3"
         }
+      ],
+      "defaultValue": "turtle",
+      "visibilityCondition": "model.output_schema == 'single_column'",
+      "mandatory": true
+    },
+    {
+      "name": "file_source_output_column",
+      "label": "Store source file in a column",
+      "type": "COLUMN",
+      "columnRole": "output_dataset",
+      "mandatory": false
+    }
+  ],
 
-        // A 'COLUMN' parameter is a string, whose value is a column name from an input schema.
-        // To specify the input schema whose column names are used, use the "columnRole" field like below.
-        // The column names will come from the schema of the first dataset associated to that role.
-        /*{
-            "name": "parameter4",
-            "type": "COLUMN",
-            "columnRole": "input_B_role"
-        }*/
-
-        // The 'COLUMNS' type works in the same way, except that it is a list of strings.
-    ],
-
-    // The field "resourceKeys" holds a list of keys that allows to limit the number
-    // of concurrent executions and activities triggered by this recipe.
-    //
-    // Administrators can configure the limit per resource key in the Administration > Settings > Flow build
-    // screen.
-
-    "resourceKeys": []
-
+  "resourceKeys": []
 }

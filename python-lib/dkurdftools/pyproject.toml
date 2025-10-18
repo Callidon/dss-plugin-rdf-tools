@@ -1,13 +1,16 @@
 [project]
 name = "dkurdftools"
 version = "1.0.0"
-description = "Add your description here"
+description = "Python package for the dkurdftools plugin"
 readme = "README.md"
 requires-python = ">=3.11"
+# dependencies referenced in code-env/python/spec/requirements.txt
 dependencies = ["rdflib==7.2.1", "requests==2.32.5"]
 
 [dependency-groups]
 dev = [
+    # pandas is packaged with DSS, hence we only have it in dev deps for unit tests
+    "pandas>=2.3.3",
     "pytest>=8.4.2",
     "requests-mock>=1.12.1",
     "ruff>=0.14.1",
