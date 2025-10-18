@@ -101,14 +101,14 @@ def generate_rows(
         graph = Graph()
         graph.parse(data=res.text, format="xml")
         for s, p, o in graph:
-            yield {"subject": str(s), "predicate": str(p), "object": str(o)}
+            yield {"subject": s.n3(), "predicate": p.n3(), "object": o.n3()}
     else:
         # sparql queries output rows of bindings
         sparql_results = res.json()
         for result in sparql_results.get("results", {}).get("bindings", []):
             yield {
-                key: value["value"]
+                key: value
                 if select_results_type == "json"
-                else parseJsonTerm(value["value"])
+                else parseJsonTerm(value).n3()
                 for key, value in result.items()
             }
