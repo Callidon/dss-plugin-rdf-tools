@@ -98,6 +98,26 @@ wheels = [
 ]
 
 [[package]]
+name = "dataiku-internal-client"
+version = "14.1.0"
+source = { url = "https://design.solutions.dataiku-dss.io/public/packages/dataiku-internal-client.tar.gz" }
+dependencies = [
+    { name = "numpy" },
+    { name = "python-dateutil" },
+    { name = "requests" },
+    { name = "urllib3" },
+]
+sdist = { hash = "sha256:35423d662d1588214f52906cfe97839bdfba53c28e8031a15fc02f850bdcb65e" }
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=1.14" },
+    { name = "python-dateutil" },
+    { name = "requests", specifier = ">=2" },
+    { name = "urllib3" },
+]
+
+[[package]]
 name = "dkurdftools"
 version = "1.0.0"
 source = { virtual = "." }
@@ -108,6 +128,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "dataiku-internal-client" },
     { name = "pandas" },
     { name = "pytest" },
     { name = "requests-mock" },
@@ -122,6 +143,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "dataiku-internal-client", url = "https://design.solutions.dataiku-dss.io/public/packages/dataiku-internal-client.tar.gz" },
     { name = "pandas", specifier = ">=2.3.3" },
     { name = "pytest", specifier = ">=8.4.2" },
     { name = "requests-mock", specifier = ">=1.12.1" },
