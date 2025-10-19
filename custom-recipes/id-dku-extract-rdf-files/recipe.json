@@ -34,70 +34,28 @@
 
   "params": [
     {
-      "name": "output_schema",
-      "label": "Output schema",
-      "type": "SELECT",
-      "selectChoices": [
-        {
-          "value": "sql_table",
-          "label": "Three columns (subject, predicate, object) and one row per triple"
-        },
-        {
-          "value": "single_column",
-          "label": "Store all RDF triples in a single column"
-        }
-      ],
-      "defaultValue": "sql_table",
-      "mandatory": true
-    },
-    {
-      "name": "single_column_output",
-      "label": "Output column name",
+      "name": "subject_output_column",
+      "label": "Subject column name",
       "type": "COLUMN",
       "columnRole": "output_dataset",
-      "visibilityCondition": "model.output_schema == 'single_column'",
+      "defaultValue": "subject",
       "mandatory": true
     },
     {
-      "name": "single_column_output_format",
-      "label": "Output format",
-      "type": "SELECT",
-      "selectChoices": [
-        {
-          "value": "turtle",
-          "label": "Turtle"
-        },
-        {
-          "value": "json-ld",
-          "label": "JSON-LD"
-        },
-        {
-          "value": "xml",
-          "label": "RDF XML"
-        },
-        {
-          "value": "prettyxml",
-          "label": "Pretty RDF XML"
-        },
-        {
-          "value": "ntriples",
-          "label": "N-Triples"
-        },
-        {
-          "value": "n3",
-          "label": "Notation-3"
-        }
-      ],
-      "defaultValue": "turtle",
-      "visibilityCondition": "model.output_schema == 'single_column'",
-      "mandatory": true
-    },
-    {
-      "name": "file_source_output_column",
-      "label": "Store source file in a column",
+      "name": "predicate_output_column",
+      "label": "Predicate column name",
       "type": "COLUMN",
       "columnRole": "output_dataset",
-      "mandatory": false
+      "defaultValue": "predicate",
+      "mandatory": true
+    },
+    {
+      "name": "object_output_column",
+      "label": "Object column name",
+      "type": "COLUMN",
+      "columnRole": "output_dataset",
+      "defaultValue": "object",
+      "mandatory": true
     }
   ],
 

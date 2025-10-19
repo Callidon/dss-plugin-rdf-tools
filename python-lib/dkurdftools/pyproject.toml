@@ -7,11 +7,16 @@ requires-python = ">=3.11"
 # dependencies referenced in code-env/python/spec/requirements.txt
 dependencies = ["rdflib==7.2.1", "requests==2.32.5"]
 
+[tool.uv.sources]
+dataiku-internal-client = { url = "https://design.solutions.dataiku-dss.io/public/packages/dataiku-internal-client.tar.gz" }
+
 [dependency-groups]
 dev = [
-    # pandas is packaged with DSS, hence we only have it in dev deps for unit tests
+    # pandas and dataiku-internal-client are packaged with DSS, hence we only have it in dev deps for unit tests
     "pandas>=2.3.3",
+    "dataiku-internal-client",
     "pytest>=8.4.2",
     "requests-mock>=1.12.1",
     "ruff>=0.14.1",
+    "dataiku-api-client>=14.2.0",
 ]
