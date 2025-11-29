@@ -1,6 +1,6 @@
-from dataiku.customformat import Formatter, OutputFormatter
+from dataiku.customformat import Formatter
 
-from dkurdftools.formats.format_extractor import RDFFormatExtractor
+from dkurdftools.formats.format_extractor import RDFFormatExtractor, RDFOutputFormatter
 
 
 class MyFormatter(Formatter):
@@ -14,7 +14,8 @@ class MyFormatter(Formatter):
         """
         Formatter.__init__(
             self, config, plugin_config
-        )  # pass the parameters to the base class
+        )
+        self.config = config
 
     def get_output_formatter(self, stream, schema):
         """
@@ -22,7 +23,7 @@ class MyFormatter(Formatter):
         :param stream: the stream to write the formatted data to
         :param schema: the schema of the rows that will be formatted (never None)
         """
-        return MyOutputFormatter(stream, schema)
+        return RDFOutputFormatter(stream, schema, "json-ld", **self.config)
 
     def get_format_extractor(self, stream, schema=None):
         """
@@ -31,43 +32,3 @@ class MyFormatter(Formatter):
         :param schema: the schema of the rows that will be extracted. None when the extractor is used to detect the format.
         """
         return RDFFormatExtractor("nt", stream, schema)
-
-
-class MyOutputFormatter(OutputFormatter):
-    """
-    Writes a stream of rows to a stream in a format. The calls will be:
-
-    * write_header()
-    * write_row(row_1)
-      ...
-    * write_row(row_N)
-    * write_footer()
-
-    """
-
-    def __init__(self, stream, schema):
-        """
-        Initialize the formatter
-        :param stream: the stream to write the formatted data to
-        """
-        OutputFormatter.__init__(self, stream)
-        self.schema = schema
-
-    def write_header(self):
-        """
-        Write the header of the format (if any)
-        """
-        pass
-
-    def write_row(self, row):
-        """
-        Write a row in the format
-        :param row: array of strings, with one value per column in the schema
-        """
-        pass
-
-    def write_footer(self):
-        """
-        Write the footer of the format (if any)
-        """
-        pass

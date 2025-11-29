@@ -1,7 +1,7 @@
 {
   "meta": {
-    "label": "RDF XML",
-    "description": "Read RDF data from XML files",
+    "label": "JSON-LD",
+    "description": "Read RDF data from JSON-LD files (.jsonld)",
     "icon": "fas fa-file-code"
   },
   "canBeDatasetFormat": true,
@@ -10,8 +10,8 @@
   "canExtractSchema": true,
   "exportOptions": [],
   "mime": {
-    "mimeType": "application/xml",
-    "extension": ".xml"
+    "mimeType": "application/ld+json",
+    "extension": ".jsonld"
   },
   "params": []
 }

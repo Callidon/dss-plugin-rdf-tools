@@ -15,7 +15,7 @@ class RDFFormatExtractor(FormatExtractor):
         FormatExtractor.__init__(self, stream)
         self.columns = ["subject", "predicate", "object"]
         # load file content
-        self.graph = parse_rdf_stream_as_graph(stream)        
+        self.graph = parse_rdf_stream_as_graph(stream, file_format=file_format)        
         # create an iterator over the graph content
         self.iterator = iter(self.graph)
         

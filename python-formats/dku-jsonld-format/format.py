@@ -14,7 +14,7 @@ class MyFormatter(Formatter):
         """
         Formatter.__init__(
             self, config, plugin_config
-        )
+        )  # pass the parameters to the base class
         self.config = config
 
     def get_output_formatter(self, stream, schema):
@@ -31,4 +31,4 @@ class MyFormatter(Formatter):
         :param stream: the stream to read the formatted data from
         :param schema: the schema of the rows that will be extracted. None when the extractor is used to detect the format.
         """
-        return RDFFormatExtractor("text/turtle", stream, schema)
+        return RDFFormatExtractor("json-ld", stream, schema)

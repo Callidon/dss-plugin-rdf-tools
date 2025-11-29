@@ -1,47 +1,17 @@
 {
-    "meta" : {
-        // label: name of the format as displayed, should be short
-        "label": "N-triples",
-
-        // description: longer string to help end users understand what this format is
-        "description": "Read RDF data from n-triples files (.nt)",
-
-        // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
-        "icon": "fas fa-file-code"
-    },
-
-    /* whether the format can be selectable as a dataset format */
-    "canBeDatasetFormat": true,
-
-    /* whether the format can be used to read files. If true, the get_format_extractor() must return an extractor */
-    "canRead": true,
-
-    /* whether the format can be used to write files. If true, the get_output_formatter() must return a formatter */
-    "canWrite": false,
-
-    /* whether the format can provide the schema without reading the data. If true, the FormatExtractor must implement read_schema() */
-    "canExtractSchema": true,
-
-    /* to get additional options in the export dialogs, list them here */
-    "exportOptions": [],
-
-    /* A mime type to use when exporting (if not set: the format is assumed to produce binary data) */
-    "mime" : {
-        /* the mime-type sent to the browser */
-        "mimeType": "application/n-triples",
-        /* DSS creates file names by concatenating a unique identifier and this extension */
-        "extension": ".nt"
-    },
-
-
-    /* params:
-    DSS will generate a formular from this list of requested parameters.
-    Your component code can then access the value provided by users using the "name" field of each parameter.
-
-    Available parameter types include:
-    STRING, INT, DOUBLE, BOOLEAN, DATE, SELECT, TEXTAREA, PRESET and others.
-
-    For the full list and for more details, see the documentation: https://doc.dataiku.com/dss/latest/plugins/reference/params.html
-    */
-    "params": []
+  "meta": {
+    "label": "N-triples",
+    "description": "Read RDF data from n-triples files (.nt)",
+    "icon": "fas fa-file-code"
+  },
+  "canBeDatasetFormat": true,
+  "canRead": true,
+  "canWrite": false,
+  "canExtractSchema": true,
+  "exportOptions": [],
+  "mime": {
+    "mimeType": "application/n-triples",
+    "extension": ".nt"
+  },
+  "params": []
 }
